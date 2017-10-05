@@ -9,7 +9,7 @@ sudo: required
 addons:
   apt:
     packages:
-    - python-pip
+    - python-p7zip
 
 install:
   # Install ansible
@@ -29,10 +29,10 @@ script:
   - idempotence=$(mktemp)
 
   # run first role
-  - ansible-playbook -i tests/inventory tests/test.yml --connection=local --sudo
+  - ansible-playbook -i tests/inventory tests/test.yml --connection=local --become
 
   # re-run role to check idempotence
-  - ansible-playbook -i tests/inventory tests/test.yml --connection=local --sudo
+  - ansible-playbook -i tests/inventory tests/test.yml --connection=local --become
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
