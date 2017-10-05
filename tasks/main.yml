@@ -1,0 +1,20 @@
+---
+# tasks file for ansible-p7zip
+
+- block:
+    - name: Install p7zip packages
+      become: yes
+      apt:
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+        cache_valid_time: "{{ apt_cache_valid_time | default(omit) }}"
+        install_recommends: no
+      with_items:
+        - "{{ p7zip_packages }}"
+        
+  become: yes
+  tags:
+    - p7zip
+    - 7zip
+    - utilities
